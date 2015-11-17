@@ -85,7 +85,7 @@ void buttonCallback(byte pin, int newState, int oldState, void *data)
             }
         }
 
-        char buffer[50];
+        char buffer[100];
         sprintf(buffer, "Pin %s changed from HIGH to LOW, adjust %d",
                 mapPinToButtonName(pin), timeAdjustment);
         Serial.println(buffer);
@@ -241,11 +241,12 @@ void loop()
     if (printTimeAndVoltage)
     {
         char buffer[50];
-        sprintf(buffer, "time: %d:%d:%d", adjustedTime.hour(),
+        sprintf(buffer, "time: %d:%d:%d", adjustedTime.hour() % 12,
                 adjustedTime.minute(), adjustedTime.second());
         Serial.println(buffer);
         sprintf(buffer, "voltage level: %d:%d:%d", hourVoltage, minuteVoltage,
                 secondVoltage);
         Serial.println(buffer);
     }
+
 }
